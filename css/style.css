@@ -147,10 +147,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--brand); box-sha
 .tpl-moderne .cv-head h1, .tpl-moderne .cv-side h3 { color: #4338ca; }
 .tpl-moderne .cv-main h2 { color: #4338ca; border-color: #4338ca; }
 
-/* Modèle Classique (gratuit) — une colonne sobre */
-.tpl-classique { display: block; }
-.tpl-classique .cv-side { background: #fff; border-top: 1pt solid #cbd5e1; margin: 0 10mm; padding: 6mm 0 10mm; order: 2; }
-.tpl-classique .cv-main { padding-bottom: 4mm; }
+/* Modèle Classique (gratuit) — une colonne sobre, sidebar reléguée en bas */
+.tpl-classique { display: flex; flex-direction: column; }
+.tpl-classique .cv-main { order: 1; padding-bottom: 4mm; }
+.tpl-classique .cv-side { order: 2; background: #fff; border-top: 1pt solid #cbd5e1; margin: 0 10mm; padding: 6mm 0 10mm; }
 .tpl-classique .cv-head { text-align: center; border-bottom: 2pt solid var(--ink); padding-bottom: 8pt; }
 .tpl-classique .cv-main h2 { color: var(--ink); border-color: var(--ink); }
 
@@ -219,7 +219,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--brand); box-sha
   .workspace { grid-template-columns: 1fr; }
   .preview-pane { position: static; }
   .hero h1 { font-size: 2rem; }
-  .cv-sheet { transform-origin: top left; }
 }
 
 /* ===== Impression : seule la feuille CV, format A4 ===== */
@@ -231,5 +230,5 @@ input:focus, textarea:focus { outline: none; border-color: var(--brand); box-sha
   .preview-pane { position: static; }
   .cv-sheet-wrap { overflow: visible; box-shadow: none; border-radius: 0; }
   .cv-sheet { margin: 0; box-shadow: none; }
-  .cv-side { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cv-sheet, .cv-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

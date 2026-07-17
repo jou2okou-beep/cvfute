@@ -31,7 +31,8 @@
   function esc(text) {
     var div = document.createElement("div");
     div.textContent = text || "";
-    return div.innerHTML;
+    // innerHTML n'échappe pas les guillemets : indispensable dans les attributs value="…".
+    return div.innerHTML.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
   function $(sel) { return document.querySelector(sel); }
   function $all(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
@@ -172,7 +173,15 @@
     renderPreview(); save();
   });
 
-  $("#btn-buy").setAttribute("href", STRIPE_LINK);
+  if (STRIPE_LINK.indexOf("http") === 0) {
+    $("#btn-buy").setAttribute("href", STRIPE_LINK);
+  } else {
+    // Paiement pas encore branché : on l'annonce au lieu de ne rien faire.
+    $("#btn-buy").addEventListener("click", function (event) {
+      event.preventDefault();
+      feedback("Le paiement en ligne ouvre très bientôt. Revenez dans quelques jours !", "ok");
+    });
+  }
 
   function sha256Hex(text) {
     return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function (buf) {
