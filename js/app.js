@@ -181,9 +181,17 @@
       }).join("");
     });
   }
-  $("#btn-validate-code").addEventListener("click", function () {
+  function feedback(message, cls) {
+    $("#code-feedback").textContent = message;
+    $("#code-feedback").className = "code-feedback " + cls;
+  }
+  function validateCode() {
     var code = $("#input-code").value.trim().toUpperCase();
-    if (!code) return;
+    if (!code) { feedback("Entrez votre code (format CVPRO-XXXX-XXXX).", "ko"); return; }
+    if (!window.crypto || !crypto.subtle) {
+      feedback("Navigateur trop ancien ou page non sécurisée : ouvrez le site en https.", "ko");
+      return;
+    }
     sha256Hex(code).then(function (hash) {
       if (window.CVFUTE_CODE_HASHES && window.CVFUTE_CODE_HASHES.indexOf(hash) !== -1) {
         localStorage.setItem(PRO_KEY, "1");
@@ -191,10 +199,15 @@
         $("#code-feedback").textContent = "✅ Pack Pro débloqué à vie. Merci ! Tous les modèles sont disponibles.";
         $("#code-feedback").className = "code-feedback ok";
       } else {
-        $("#code-feedback").textContent = "Code invalide. Vérifiez la saisie (format CVPRO-XXXX-XXXX).";
-        $("#code-feedback").className = "code-feedback ko";
+        feedback("Code invalide. Vérifiez la saisie (format CVPRO-XXXX-XXXX).", "ko");
       }
+    }).catch(function () {
+      feedback("Erreur inattendue pendant la vérification. Réessayez.", "ko");
     });
+  }
+  $("#btn-validate-code").addEventListener("click", validateCode);
+  $("#input-code").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") { event.preventDefault(); validateCode(); }
   });
 
   // ---------- PDF & reset ----------
