@@ -160,20 +160,19 @@
   $("#template-picker").addEventListener("click", function (event) {
     var btn = event.target.closest("button");
     if (!btn) return;
-    if (btn.getAttribute("data-pro") && !isPro()) { openModal(); return; }
+    if (btn.getAttribute("data-pro") && !isPro()) {
+      // Modèle verrouillé : on emmène vers la section Pack Pro (pas de popup).
+      document.getElementById("tarifs").scrollIntoView({ behavior: "smooth" });
+      $("#input-code").focus({ preventScroll: true });
+      return;
+    }
     state.template = btn.getAttribute("data-template");
     $all("#template-picker button").forEach(function (b) { b.classList.remove("active"); });
     btn.classList.add("active");
     renderPreview(); save();
   });
 
-  function openModal() { $("#modal-pro").hidden = false; $("#input-code").focus(); }
-  function closeModal() { $("#modal-pro").hidden = true; $("#code-feedback").textContent = ""; }
-  $("#btn-have-code").addEventListener("click", openModal);
-  $("#btn-close-modal").addEventListener("click", closeModal);
-  $("#modal-pro").addEventListener("click", function (e) { if (e.target === $("#modal-pro")) closeModal(); });
   $("#btn-buy").setAttribute("href", STRIPE_LINK);
-  $("#btn-buy-modal").setAttribute("href", STRIPE_LINK);
 
   function sha256Hex(text) {
     return crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(function (buf) {
@@ -189,9 +188,8 @@
       if (window.CVFUTE_CODE_HASHES && window.CVFUTE_CODE_HASHES.indexOf(hash) !== -1) {
         localStorage.setItem(PRO_KEY, "1");
         refreshPickerLocks();
-        $("#code-feedback").textContent = "✅ Pack Pro débloqué à vie. Merci !";
+        $("#code-feedback").textContent = "✅ Pack Pro débloqué à vie. Merci ! Tous les modèles sont disponibles.";
         $("#code-feedback").className = "code-feedback ok";
-        setTimeout(closeModal, 1600);
       } else {
         $("#code-feedback").textContent = "Code invalide. Vérifiez la saisie (format CVPRO-XXXX-XXXX).";
         $("#code-feedback").className = "code-feedback ko";

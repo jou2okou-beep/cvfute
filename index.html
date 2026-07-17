@@ -136,7 +136,14 @@
         <li>Pas d'abonnement, jamais</li>
       </ul>
       <a href="#" class="btn btn-primary btn-block" id="btn-buy">Débloquer le Pack Pro</a>
-      <button type="button" class="btn-link" id="btn-have-code">J'ai déjà un code</button>
+      <div class="code-entry">
+        <label for="input-code">J'ai déjà un code :</label>
+        <div class="code-entry-row">
+          <input type="text" id="input-code" placeholder="CVPRO-XXXX-XXXX" autocomplete="off">
+          <button type="button" class="btn btn-ghost" id="btn-validate-code">Valider</button>
+        </div>
+        <p class="code-feedback" id="code-feedback"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -163,21 +170,6 @@
     <span class="muted">Aucun cookie, aucun traqueur, aucune donnée collectée.</span>
   </div>
 </footer>
-
-<!-- Modale de déblocage Pro -->
-<div class="modal-backdrop" id="modal-pro" hidden>
-  <div class="modal card">
-    <h3>Débloquer le Pack Pro</h3>
-    <p class="muted">Entrez le code reçu après votre paiement.</p>
-    <input type="text" id="input-code" placeholder="CVPRO-XXXX-XXXX" autocomplete="off">
-    <p class="code-feedback" id="code-feedback"></p>
-    <div class="modal-actions">
-      <button class="btn btn-primary" id="btn-validate-code">Valider le code</button>
-      <a href="#" class="btn btn-ghost" id="btn-buy-modal">Acheter (9,90 €)</a>
-      <button class="btn-link" id="btn-close-modal">Fermer</button>
-    </div>
-  </div>
-</div>
 
 <script src="js/codes.js"></script>
 <script src="js/app.js"></script>
