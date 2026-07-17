@@ -5,8 +5,8 @@
 
   var STORAGE_KEY = "cvfute_data";
   var PRO_KEY = "cvfute_pro";
-  // Lien de paiement Stripe (Payment Link) — remplacé au lancement.
-  var STRIPE_LINK = "#tarifs";
+  // Lien de paiement Stripe (Payment Link).
+  var STRIPE_LINK = "https://buy.stripe.com/7sYfZhamqdvx7JdbffejK00";
 
   var state = {
     nom: "", titre: "", email: "", tel: "", ville: "", lien: "",
