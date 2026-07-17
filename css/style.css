@@ -209,6 +209,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--brand); box-sha
   position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55);
   display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px;
 }
+.modal-backdrop[hidden] { display: none; }
 .modal { max-width: 420px; width: 100%; }
 .modal h3 { margin-top: 0; }
 .modal input { margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
