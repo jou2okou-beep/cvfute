@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CVFuté — Créez un CV professionnel en 5 minutes, sans inscription</title>
+  <meta name="description" content="Générateur de CV français moderne et gratuit. Vos données restent dans votre navigateur : sans compte, sans abonnement. Téléchargez votre CV en PDF.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <meta property="og:title" content="CVFuté — Un CV professionnel en 5 minutes">
+  <meta property="og:description" content="Sans inscription. Vos données ne quittent jamais votre navigateur. PDF gratuit.">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="#"><img src="img/logo.svg" alt="" width="30" height="30"><span>CVFuté</span></a>
+    <nav class="nav">
+      <a href="#editeur" class="nav-link">Éditeur</a>
+      <a href="#tarifs" class="nav-link">Pack Pro</a>
+      <a href="#editeur" class="btn btn-primary">Créer mon CV</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero container">
+  <div class="hero-copy">
+    <span class="hero-badge">🔒 100 % privé — vos données ne quittent jamais votre navigateur</span>
+    <h1>Un CV qui décroche des entretiens, <span class="grad">en 5 minutes</span>.</h1>
+    <p class="hero-sub">Remplissez, regardez votre CV se construire en direct, téléchargez le PDF.
+    Sans inscription, sans abonnement, sans arnaque au « premier CV gratuit ».</p>
+    <div class="hero-actions">
+      <a href="#editeur" class="btn btn-primary btn-lg">Créer mon CV gratuitement</a>
+    </div>
+    <p class="muted">2 modèles gratuits pour toujours · Pack Pro en paiement unique, pas d'abonnement</p>
+  </div>
+</section>
+
+<main id="editeur" class="workspace container">
+  <div class="editor-pane">
+    <h2>Vos informations</h2>
+    <p class="muted autosave-note">💾 Enregistrement automatique dans votre navigateur.</p>
+
+    <details class="section" open>
+      <summary>Identité</summary>
+      <div class="form-row">
+        <label>Prénom Nom<input type="text" id="f-nom" placeholder="Camille Martin"></label>
+        <label>Titre du poste visé<input type="text" id="f-titre" placeholder="Chef de projet digital"></label>
+      </div>
+      <div class="form-row">
+        <label>Email<input type="email" id="f-email" placeholder="camille.martin@email.fr"></label>
+        <label>Téléphone<input type="text" id="f-tel" placeholder="06 12 34 56 78"></label>
+      </div>
+      <div class="form-row">
+        <label>Ville<input type="text" id="f-ville" placeholder="Lyon"></label>
+        <label>Site / LinkedIn<input type="text" id="f-lien" placeholder="linkedin.com/in/cmartin"></label>
+      </div>
+    </details>
+
+    <details class="section" open>
+      <summary>Accroche</summary>
+      <label>2-3 phrases qui résument votre profil
+        <textarea id="f-profil" rows="3" placeholder="Chef de projet avec 5 ans d'expérience en agence…"></textarea>
+      </label>
+    </details>
+
+    <details class="section" open>
+      <summary>Expériences</summary>
+      <div id="list-exp"></div>
+      <button type="button" class="btn btn-ghost btn-sm" data-add="exp">+ Ajouter une expérience</button>
+    </details>
+
+    <details class="section">
+      <summary>Formation</summary>
+      <div id="list-form"></div>
+      <button type="button" class="btn btn-ghost btn-sm" data-add="form">+ Ajouter une formation</button>
+    </details>
+
+    <details class="section">
+      <summary>Compétences & langues</summary>
+      <label>Compétences <span class="muted">(séparées par des virgules)</span>
+        <input type="text" id="f-competences" placeholder="Gestion de projet, SEO, Figma, Excel">
+      </label>
+      <label>Langues <span class="muted">(ex. : Anglais courant, Espagnol B1)</span>
+        <input type="text" id="f-langues" placeholder="Anglais courant, Espagnol B1">
+      </label>
+      <label>Centres d'intérêt
+        <input type="text" id="f-interets" placeholder="Escalade, photographie, bénévolat">
+      </label>
+    </details>
+
+    <div class="editor-actions">
+      <button type="button" class="btn btn-primary btn-lg" id="btn-pdf">⬇ Télécharger en PDF</button>
+      <button type="button" class="btn-link danger" id="btn-reset">Tout effacer</button>
+    </div>
+  </div>
+
+  <div class="preview-pane">
+    <div class="template-picker" id="template-picker">
+      <span class="picker-label">Modèle :</span>
+      <button data-template="moderne" class="active">Moderne</button>
+      <button data-template="classique">Classique</button>
+      <button data-template="nuit" data-pro="1">Nuit 🔒</button>
+      <button data-template="elegant" data-pro="1">Élégant 🔒</button>
+      <button data-template="tech" data-pro="1">Tech 🔒</button>
+      <button data-template="executive" data-pro="1">Executive 🔒</button>
+    </div>
+    <div class="cv-sheet-wrap">
+      <div id="cv-preview" class="cv-sheet tpl-moderne"><!-- rendu par app.js --></div>
+    </div>
+  </div>
+</main>
+
+<section id="tarifs" class="pricing container">
+  <h2>Le Pack Pro, à vie</h2>
+  <div class="pricing-grid">
+    <div class="card price-card">
+      <h3>Gratuit</h3>
+      <p class="price">0 €</p>
+      <ul>
+        <li>Modèles Moderne & Classique</li>
+        <li>PDF illimités</li>
+        <li>Aucune inscription</li>
+        <li>Données 100 % locales</li>
+      </ul>
+      <a href="#editeur" class="btn btn-ghost btn-block">Créer mon CV</a>
+    </div>
+    <div class="card price-card price-card-pro">
+      <span class="badge-pro">Paiement unique</span>
+      <h3>Pack Pro</h3>
+      <p class="price">9,90 €<span> une seule fois</span></p>
+      <ul>
+        <li>4 modèles exclusifs</li>
+        <li>Accès à vie, sur cet appareil et les suivants</li>
+        <li>Futurs modèles inclus</li>
+        <li>Pas d'abonnement, jamais</li>
+      </ul>
+      <a href="#" class="btn btn-primary btn-block" id="btn-buy">Débloquer le Pack Pro</a>
+      <button type="button" class="btn-link" id="btn-have-code">J'ai déjà un code</button>
+    </div>
+  </div>
+</section>
+
+<section class="faq container">
+  <h2>Questions fréquentes</h2>
+  <details><summary>Où sont stockées mes données ?</summary>
+    <p>Uniquement dans votre navigateur (localStorage). Rien n'est envoyé sur un serveur :
+    ni votre nom, ni votre parcours, ni votre email. Videz le stockage du site et tout disparaît.</p></details>
+  <details><summary>Comment obtenir le PDF ?</summary>
+    <p>Le bouton « Télécharger en PDF » utilise l'impression de votre navigateur :
+    choisissez « Enregistrer au format PDF » comme destination. Qualité parfaite, format A4.</p></details>
+  <details><summary>Le Pack Pro est-il un abonnement ?</summary>
+    <p>Non. Vous payez 9,90 € une seule fois et recevez un code de déblocage à vie,
+    utilisable aussi sur vos autres appareils.</p></details>
+  <details><summary>J'ai payé mais je n'ai pas de code.</summary>
+    <p>Le code s'affiche sur la page de confirmation juste après le paiement et vous est envoyé
+    par email par Stripe. Un souci ? Écrivez-nous, on vous répond vite.</p></details>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 CVFuté — Fait en France 🇫🇷</span>
+    <span class="muted">Aucun cookie, aucun traqueur, aucune donnée collectée.</span>
+  </div>
+</footer>
+
+<!-- Modale de déblocage Pro -->
+<div class="modal-backdrop" id="modal-pro" hidden>
+  <div class="modal card">
+    <h3>Débloquer le Pack Pro</h3>
+    <p class="muted">Entrez le code reçu après votre paiement.</p>
+    <input type="text" id="input-code" placeholder="CVPRO-XXXX-XXXX" autocomplete="off">
+    <p class="code-feedback" id="code-feedback"></p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="btn-validate-code">Valider le code</button>
+      <a href="#" class="btn btn-ghost" id="btn-buy-modal">Acheter (9,90 €)</a>
+      <button class="btn-link" id="btn-close-modal">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/codes.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
